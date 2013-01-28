@@ -1,0 +1,6 @@
+
+function collisionDetection() {
+	
+	
+	return XXX
+}
