@@ -4,6 +4,8 @@
  * that all child objects will inherit, as well as the defualt
  * functions. 
  */
+
+
 function Drawable() {
 
 	this.init = function(x, y, width, height) {
@@ -35,7 +37,8 @@ function Drawable() {
  	this.centerX = 0;
  	this.centerY = 0;
  	this.direction = 0;
- 	this.mass = 0;
+ 	this.mass = 10;
+
  	this.speed = 2;
     this.speedX = this.speed;
     this.speedY = this.speed;

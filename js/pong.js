@@ -123,8 +123,8 @@ function Game() {
 
 			this.mainball2.init(0, 0, imageRepository.mainball.width, imageRepository.mainball.height);
 
-			console.log(this.mainball.x);
-			console.log(this.mainball2.x);
+			//console.log(this.mainball.x);
+			//console.log(this.mainball2.x);
 
 			
 
@@ -158,6 +158,7 @@ function animate() {
 	game.mainball2.draw();
 	game.paddle.move();
 	collisionDetection();
+
 
 }
 

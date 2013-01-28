@@ -12,13 +12,18 @@ function collisionDetection() {
 	var distanceY = (y2 - y1)*(y2 - y1);
 	var distance = Math.sqrt(( distanceX + distanceY ));
 
+	console.log('before collision game.mainball.x is ' +game.mainball.x);
+	//console.log('game.mainball2.x is ' +game.mainball2.x);
+
+
+	
+	//test();
 
 	if(distance < 50) {
-		
+		physicsEngine(game.mainball, game.mainball2);
 	}
 
 	
-	//console.log('distanceX is ' +distanceX);
 
 	return false;
 }
