@@ -30,16 +30,28 @@ function Drawable() {
  */
  
  function Ball() {
+
+ 	this.radius = 0;
+ 	this.centerX = 0;
+ 	this.centerY = 0;
+ 	this.direction = 0;
 	
 	// information: radius, center coordinates (x and y), direction (pending)
  }
+ Ball.prototype = new Drawable();
  
+
 // Rectangle class
  function Rectangle() {
+
+ 	this.width = 0;
+ 	this.height = 0;
  // information: width, height
  //paddle and wall will inherit from rectangle
  }
+ Rectangle.prototype = new Drawable();
  
+
  /**
  * Wall class
  */
@@ -48,6 +60,7 @@ function Drawable() {
 	
 	// XXXX
  }
+ Wall.prototype = new Drawable();
  
   /**
  * Object Pool class
@@ -130,7 +143,7 @@ function Paddle() {
 
 
 }
-Paddle.prototype = new Drawable();
+Paddle.prototype = new Rectangle();
 
 
 
@@ -185,4 +198,4 @@ function Mainball() {
 	};
 
 }
-Mainball.prototype = new Drawable();
+Mainball.prototype = new Ball();
