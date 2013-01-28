@@ -35,6 +35,10 @@ function Drawable() {
  	this.centerX = 0;
  	this.centerY = 0;
  	this.direction = 0;
+ 	this.mass = 0;
+ 	this.speed = 2;
+    this.speedX = this.speed;
+    this.speedY = this.speed;
 	
 	// information: radius, center coordinates (x and y), direction (pending)
  }
@@ -61,7 +65,7 @@ function Drawable() {
 	// XXXX
  }
  Wall.prototype = new Drawable();
- 
+
   /**
  * Object Pool class
  */
@@ -154,11 +158,7 @@ Paddle.prototype = new Rectangle();
  */
 function Mainball() {
 
-
-
-	this.speed = 2;
-    this.speedX = this.speed;
-    this.speedY = this.speed;
+	
     this.leftEdge = 0;
     this.rightEdge = this.canvasWidth;
     this.topEdge = 0;

@@ -10,8 +10,9 @@ function init() {
 }
 
 function restartGame() {
-	if (game.mainball.y > game.mainball.bottomEdge)
-		document.location.reload();
+	//if (game.mainball.y > game.mainball.bottomEdge)
+
+		//document.location.reload();
 }
 
 /**
@@ -95,6 +96,7 @@ function Game() {
 			Mainball.prototype.canvasWidth = this.mainCanvas.width;
 			Mainball.prototype.canvasHeight = this.mainCanvas.height;
 
+
 			// Initialize the background object
 			this.background = new Background();
 			this.background.init(0,0); // Set draw point to 0,0
@@ -109,12 +111,20 @@ function Game() {
 
 			// Initialize the mainball object
 			this.mainball = new Mainball();
+			this.mainball2 = new Mainball();
+
+
 
 			// Set the mainball to start at middle
 			var mainballStartX = this.mainCanvas.width/2 - imageRepository.mainball.width;
 			var mainballStartY = this.mainCanvas.height/10;
 
 			this.mainball.init(mainballStartX, mainballStartY, imageRepository.mainball.width, imageRepository.mainball.height);
+
+			this.mainball2.init(0, 0, imageRepository.mainball.width, imageRepository.mainball.height);
+
+			console.log(this.mainball.x);
+			console.log(this.mainball2.x);
 
 			
 
@@ -126,9 +136,10 @@ function Game() {
 
 	// Start the animation loop
 	this.start = function() {
-		alert('Start Game?');
+		//alert('Start Game?');
 		this.paddle.draw();
 		this.mainball.draw();
+		this.mainball2.draw();
 		animate();
 	};
 }
@@ -144,7 +155,10 @@ function animate() {
 	requestAnimFrame( animate );
 	game.background.draw();
 	game.mainball.draw();
+	game.mainball2.draw();
 	game.paddle.move();
+	collisionDetection();
+
 }
 
 
