@@ -39,11 +39,6 @@ function Drawable() {
  	this.direction = 0;
  	this.mass = 10;
 
- 	this.speed = 2;
-    this.speedX = this.speed;
-    this.speedY = this.speed;
-	
-	// information: radius, center coordinates (x and y), direction (pending)
  }
  Ball.prototype = new Drawable();
  
@@ -160,6 +155,58 @@ Paddle.prototype = new Rectangle();
  * around the screen.
  */
 function Mainball() {
+ 	this.speed = 2;
+    this.speedX = this.speed;
+    this.speedY = this.speed;
+
+    this.leftEdge = 0;
+    this.rightEdge = this.canvasWidth;
+    this.topEdge = 0;
+    this.bottomEdge = this.canvasHeight;
+	
+    	//Move the main ball
+	this.draw = function() {
+		
+		this.context.clearRect(this.x-1, this.y, this.width+1, this.height);
+
+	    this.x += this.speedX;
+	    this.y += this.speedY;
+
+	    
+	    // X Collision
+	    if (this.x <= this.leftEdge) {       
+	    	this.speedX = this.speed;
+	    }     
+	    else if (this.x >= this.rightEdge - this.width) {
+	      this.speedX = -this.speed;
+	    }
+
+
+	    // Y Collision
+	    if (this.y >= this.bottomEdge - this.height - 16) {
+
+	    	// if hits paddle
+	    	if (this.x + 25 > game.paddle.x && this.x < game.paddle.x + 64)
+	    		this.speedY = -this.speed; // reverse speed
+	    	else
+	    		restartGame();
+	    } else if (this.y <= this.topEdge) { // if hit the top
+	    	this.speedY = this.speed;
+	    }
+
+		this.context.drawImage(imageRepository.mainball, this.x, this.y);
+	};
+	
+
+}
+Mainball.prototype = new Ball();
+
+
+function Enemyball() {
+
+	this.speed = 2;
+    this.speedX = this.speed;
+    this.speedY = this.speed;
 
 	
     this.leftEdge = 0;
@@ -197,8 +244,10 @@ function Mainball() {
 	    	this.speedY = this.speed;
 	    }
 
-		this.context.drawImage(imageRepository.mainball, this.x, this.y);
+		this.context.drawImage(imageRepository.enemyball, this.x, this.y);
+
+
 	};
 
 }
-Mainball.prototype = new Ball();
+Enemyball.prototype = new Ball();

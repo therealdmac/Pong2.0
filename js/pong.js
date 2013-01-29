@@ -12,7 +12,7 @@ function init() {
 function restartGame() {
 	//if (game.mainball.y > game.mainball.bottomEdge)
 
-		//document.location.reload();
+	//	document.location.reload();
 }
 
 /**
@@ -26,9 +26,10 @@ var imageRepository = new function() {
 	this.background = new Image();
 	this.paddle = new Image();
 	this.mainball = new Image();
+	this.enemyball = new Image();
 
 	// Ensure all images have loaded before starting the game
-	var numImages = 3;
+	var numImages = 4;
 	var numLoaded = 0;
 
 	function imageLoaded() {
@@ -46,12 +47,15 @@ var imageRepository = new function() {
 	this.mainball.onload = function() {
 		imageLoaded();
 	}
-
+	this.enemyball.onload = function() {
+		imageLoaded();
+	}
 
 	// Set images src
 	this.background.src = "imgs/bg.png";
 	this.paddle.src = "imgs/paddle.png";
 	this.mainball.src = "imgs/main_ball.png";
+	this.enemyball.src = "imgs/enemy_ball.png";
 }
 
 
@@ -92,10 +96,9 @@ function Game() {
 			Paddle.prototype.canvasWidth = this.paddleCanvas.width;
 			Paddle.prototype.canvasHeight = this.paddleCanvas.height;
 
-			Mainball.prototype.context = this.mainContext;
-			Mainball.prototype.canvasWidth = this.mainCanvas.width;
-			Mainball.prototype.canvasHeight = this.mainCanvas.height;
-
+			Ball.prototype.context = this.mainContext;
+			Ball.prototype.canvasWidth = this.mainCanvas.width;
+			Ball.prototype.canvasHeight = this.mainCanvas.height;
 
 			// Initialize the background object
 			this.background = new Background();
@@ -103,6 +106,7 @@ function Game() {
 
 			// Initialize the paddle object
 			this.paddle = new Paddle();
+
 			// Set the paddle to start near the bottom middle of the canvas
 			var paddleStartX = this.paddleCanvas.width/2 - imageRepository.paddle.width;
 			var paddleStartY = this.paddleCanvas.height - imageRepository.paddle.height;
@@ -112,8 +116,7 @@ function Game() {
 			// Initialize the mainball object
 			this.mainball = new Mainball();
 			this.mainball2 = new Mainball();
-
-
+			this.enemyball = new Enemyball();
 
 			// Set the mainball to start at middle
 			var mainballStartX = this.mainCanvas.width/2 - imageRepository.mainball.width;
@@ -123,9 +126,7 @@ function Game() {
 
 			this.mainball2.init(0, 0, imageRepository.mainball.width, imageRepository.mainball.height);
 
-			//console.log(this.mainball.x);
-			//console.log(this.mainball2.x);
-
+			this.enemyball.init(50, 10, imageRepository.mainball.width, imageRepository.mainball.height);
 			
 
 			return true;
@@ -137,10 +138,17 @@ function Game() {
 	// Start the animation loop
 	this.start = function() {
 		//alert('Start Game?');
+
+		// draw everything first round
+		game.background.draw();
 		this.paddle.draw();
 		this.mainball.draw();
 		this.mainball2.draw();
+		this.enemyball.draw();
+
+		// start the animation loop
 		animate();
+
 	};
 }
 
@@ -153,9 +161,11 @@ function Game() {
  */
 function animate() {
 	requestAnimFrame( animate );
-	game.background.draw();
+     
+	
 	game.mainball.draw();
 	game.mainball2.draw();
+	game.enemyball.draw();
 	game.paddle.move();
 	collisionDetection();
 

@@ -73,11 +73,8 @@ function computeNewTrajectory(){
 	
 	//Resolve velocity of each ball into normal and tangential components
 	normalScalarVelocityOfBallOne = unitNormalXVector * xVelocityOfBallOne + unitNormalYVector * yVelocityOfBallOne;	//scalar normal velocity of ballOne
-		
 
 	tangentScalarVelocityOfBallOne = unitTangentXVector * xVelocityOfBallOne + unitTangentYVector * yVelocityOfBallOne;
-
-
 
 
 		//scalar tangent velocity of ballOne
