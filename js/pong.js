@@ -167,6 +167,8 @@ function animate() {
 	game.mainball2.draw();
 	game.enemyball.draw();
 	game.paddle.move();
+
+	// separate thread - use web workers
 	collisionDetection();
 
 

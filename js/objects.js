@@ -27,20 +27,6 @@ function Drawable() {
 	};
 }
 
-/**
- * Ball class
- */
- 
- function Ball() {
-
- 	this.radius = 0;
- 	this.centerX = 0;
- 	this.centerY = 0;
- 	this.direction = 0;
- 	this.mass = 10;
-
- }
- Ball.prototype = new Drawable();
  
 
 // Rectangle class
@@ -148,6 +134,24 @@ function Paddle() {
 Paddle.prototype = new Rectangle();
 
 
+/**
+ * Ball class
+ */
+ 
+ function Ball() {
+
+ 	this.radius = 0;
+ 	this.centerX = 0;
+ 	this.centerY = 0;
+ 	this.direction = 0;
+ 	this.mass = 10;
+
+ 	this.speed = 2;
+    this.speedX = this.speed;
+    this.speedY = this.speed;
+
+ }
+ Ball.prototype = new Drawable();
 
 /**
  * Create the Main Ball object that the player controls. The Main Ball is
@@ -155,9 +159,7 @@ Paddle.prototype = new Rectangle();
  * around the screen.
  */
 function Mainball() {
- 	this.speed = 2;
-    this.speedX = this.speed;
-    this.speedY = this.speed;
+ 	
 
     this.leftEdge = 0;
     this.rightEdge = this.canvasWidth;
@@ -203,11 +205,6 @@ Mainball.prototype = new Ball();
 
 
 function Enemyball() {
-
-	this.speed = 2;
-    this.speedX = this.speed;
-    this.speedY = this.speed;
-
 	
     this.leftEdge = 0;
     this.rightEdge = this.canvasWidth;

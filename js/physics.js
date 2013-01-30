@@ -24,31 +24,31 @@ var newXVelocityOfBallOne,
 	newXVelocityOfBallTwo, 
 	newYVelocityOfBallTwo;
 
-	var normalXVector, 
-		normalYVector, 
-		unitNormalXVector, 
-		unitNormalYVector, 
-		unitTangentXVector, 
-		unitTangentYVector;
-		
-	var normalScalarVelocityOfBallOne, 
-		tangentScalarVelocityOfBallOne, 
-		normalScalarVelocityOfBallTwo, 
-		tangentScalarVelocityOfBallTwo;
-		
-	var newNormalScalarVelocityOfBallOne, 
-		newNormalScalarVelocityOfBallTwo;
+var normalXVector, 
+	normalYVector, 
+	unitNormalXVector, 
+	unitNormalYVector, 
+	unitTangentXVector, 
+	unitTangentYVector;
 	
-	var normalXVectorVelocityOfBallOne, 
-		normalYVectorVelocityOfBallOne, 
-		tangentXVectorVelocityOfBallOne, 
-		tangentYVectorVelocityOfBallOne;
-		
+var normalScalarVelocityOfBallOne, 
+	tangentScalarVelocityOfBallOne, 
+	normalScalarVelocityOfBallTwo, 
+	tangentScalarVelocityOfBallTwo;
 	
-	var normalXVectorVelocityOfBallTwo, 
-		normalYVectorVelocityOfBallTwo, 
-		tangentXVectorVelocityOfBallTwo, 
-		tangentYVectorVelocityOfBallTwo;
+var newNormalScalarVelocityOfBallOne, 
+	newNormalScalarVelocityOfBallTwo;
+
+var normalXVectorVelocityOfBallOne, 
+	normalYVectorVelocityOfBallOne, 
+	tangentXVectorVelocityOfBallOne, 
+	tangentYVectorVelocityOfBallOne;
+	
+
+var normalXVectorVelocityOfBallTwo, 
+	normalYVectorVelocityOfBallTwo, 
+	tangentXVectorVelocityOfBallTwo, 
+	tangentYVectorVelocityOfBallTwo;
 
 
 
