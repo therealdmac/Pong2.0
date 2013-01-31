@@ -38,11 +38,7 @@ function stopWorker() {
   w.terminate();
 }
 
-function testWorker() {
-	i=i+1;
-	postMessage(i);
-	setTimeout("timedCount()",500);
-}
+
 
 /**
  * Define an object to hold all our images for the game so images
