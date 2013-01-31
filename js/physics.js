@@ -1,5 +1,6 @@
 
 
+
 //Global for now
 var ballOneXCoordinate,
 	ballOneYCoordinate,
@@ -139,7 +140,6 @@ function setObjectTwoParameters(thisObject){
 
 //This is the function that will be called by the program, the rest of them are private functions
 function physicsEngine(objectOne, objectTwo){
-
 
 	setObjectOneParameters(objectOne);
 	setObjectTwoParameters(objectTwo);

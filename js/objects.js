@@ -65,20 +65,12 @@ function Drawable() {
  * canvas and creates the illusion of moving by panning the image.
  */
 function Background() {
-	this.speed = 1; // Redefine speed of the background for panning
 
 	// Implement abstract function
 	this.draw = function() {
 		// Pan background
 		//this.y += this.speed;
 		this.context.drawImage(imageRepository.background, this.x, this.y);
-
-		// Draw another image at the top edge of the first image
-		this.context.drawImage(imageRepository.background, this.x, this.y - this.canvasHeight);
-
-		// If the image scrolled off the screen, reset
-		if (this.y >= this.canvasHeight)
-			this.y = 0;
 	};
 }
 // Set Background to inherit properties from Drawable
@@ -93,7 +85,7 @@ Background.prototype = new Drawable();
  */
 function Paddle() {
 
-	this.speed = 5;
+	this.speed = 4;
 	var counter = 0;
 
 	this.draw = function() {
@@ -133,6 +125,43 @@ function Paddle() {
 }
 Paddle.prototype = new Rectangle();
 
+
+function Shooter() {
+
+	this.speed = -2;
+
+	this.draw = function() {
+
+		this.context.drawImage(imageRepository.shooter, this.x, this.y);
+
+		console.log('canvasWidth is ' +this.canvasWidth-this.width)
+	};
+
+	this.move = function() {
+
+
+		// clear current image
+		this.context.clearRect(this.x, this.y, this.width, this.height);
+		
+		// move left
+		this.x += this.speed;
+
+		if (this.x < 10) {
+			this.speed = -this.speed;
+		} else if (this.x >= this.canvasWidth - this.width) {
+			this.speed = this.speed;
+		}
+		
+
+			
+
+
+		// Finish by redrawing the paddle
+		this.draw();
+	}
+
+}
+Shooter.prototype = new Rectangle();
 
 /**
  * Ball class

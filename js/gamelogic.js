@@ -30,7 +30,11 @@ function collisionDetection() {
 	
 
 	if( ( distance2 ) < 50) {
+		// run in parallel while animate is still running
 		physicsEngine(game.mainball, game.enemyball);
+
+
+
 	}
 
 	if( ( distance1 ) < 50) {
@@ -47,12 +51,10 @@ function collisionDetection() {
 }
 
 
+// enemyBall Shooter
+function shooterTimer() {
 
-// newXVelocityOfBallOne
-// newYVelocityOfBallOne
-// newXVelocityOfBallTwo
-// newYVelocityOfBallTwo
+	
 
-
-
+}
 

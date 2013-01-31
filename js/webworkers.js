@@ -1,11 +1,9 @@
+var time3 = 0;
 
-var i=0;
-
-function timedCount()
-{
-	i=i+1;
-	postMessage(i);
-	setTimeout("timedCount()",500);
+function startTimer3() {
+  time3++;
+  postMessage(time3);
+  setTimeout("startTimer3()", 1);
 }
 
-timedCount();
+startTimer3();

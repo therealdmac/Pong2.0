@@ -2,6 +2,24 @@
  * Initialize the Game and start it
  */
 var game = new Game();
+var d = new Date();
+var time1 = 0;
+var time2 = 0;
+
+function startTimer() {
+	time1++;
+	//console.log('getMilliseconds returns ' +d.getMilliseconds());
+	document.getElementById("result").innerHTML=time1; 
+	setTimeout("startTimer()", 1);
+	  
+}
+
+function startTimer2() {
+	time2++;
+	setTimeout("startTimer2()", 1000);
+	document.getElementById("result2").innerHTML=time2;   
+}
+
 
 function init() {
 	if(game.init())
@@ -15,22 +33,24 @@ function restartGame() {
 }
 
 function startWorker() {
+	console.log('entered startworkers');
+
 	if(typeof(Worker)!=="undefined")
 	  {
 	    if(typeof(w)=="undefined")
 	  {
-	  	console.log('web workers created!');
-	    w=new Worker("js/webworkers.js");
+	    w = new Worker("js/webworkers.js");
+
 	  }
 
 	  // when web workers return a message
 	  w.onmessage = function (event) {
-	    document.getElementById("result").innerHTML=event.data;
+	    document.getElementById("result3").innerHTML=event.data;
 	    };
 	  }
 	else
 	  {
-	  document.getElementById("result").innerHTML="Sorry, your browser does not support Web Workers...";
+	  document.getElementById("result3").innerHTML="Sorry, your browser does not support Web Workers...";
 	  }
 }
 
@@ -52,9 +72,10 @@ var imageRepository = new function() {
 	this.paddle = new Image();
 	this.mainball = new Image();
 	this.enemyball = new Image();
+	this.shooter = new Image();
 
 	// Ensure all images have loaded before starting the game
-	var numImages = 4;
+	var numImages = 5;
 	var numLoaded = 0;
 
 	function imageLoaded() {
@@ -75,12 +96,16 @@ var imageRepository = new function() {
 	this.enemyball.onload = function() {
 		imageLoaded();
 	}
+	this.shooter.onload = function() {
+		imageLoaded();
+	}
 
 	// Set images src
 	this.background.src = "imgs/bg.png";
 	this.paddle.src = "imgs/paddle.png";
 	this.mainball.src = "imgs/main_ball.png";
 	this.enemyball.src = "imgs/enemy_ball.png";
+	this.shooter.src = "imgs/shooter.png";
 }
 
 
@@ -125,7 +150,11 @@ function Game() {
 			Ball.prototype.canvasWidth = this.mainCanvas.width;
 			Ball.prototype.canvasHeight = this.mainCanvas.height;
 
-			console.log(Ball.prototype.canvasWidth);
+			Shooter.prototype.context = this.paddleContext;
+			Shooter.prototype.canvasWidth = this.paddleCanvas.width;
+			Shooter.prototype.canvasHeight = this.paddleCanvas.height;
+	
+
 
 			// Initialize the background object
 			this.background = new Background();
@@ -154,6 +183,13 @@ function Game() {
 			this.mainball2.init(0, 0, imageRepository.mainball.width, imageRepository.mainball.height);
 
 			this.enemyball.init(100, 10, imageRepository.mainball.width, imageRepository.mainball.height);
+
+			// Initialize the Shooter
+			this.shooter = new Shooter();
+			var shooterStartX = this.paddleCanvas.width/2 - imageRepository.shooter.width;
+			var shooterStartY = 0;
+			this.shooter.init(shooterStartX, shooterStartY, imageRepository.shooter.width,
+			               imageRepository.paddle.height);
 			
 
 			return true;
@@ -172,6 +208,7 @@ function Game() {
 		this.mainball.draw();
 		this.mainball2.draw();
 		this.enemyball.draw();
+		this.shooter.draw();
 
 		//console.log('this.enemyball.leftEdge is ' +this.enemyball.leftEdge);
 
@@ -190,17 +227,18 @@ function Game() {
  */
 function animate() {
 	requestAnimFrame( animate );
-     
 	
+	// Rendering 
 	game.mainball.draw();
 	game.mainball2.draw();
 	game.enemyball.draw();
 	game.paddle.move();
+	game.shooter.move();
+
+
 
 	// separate thread - use web workers
 	collisionDetection();
-
-
 }
 
 
