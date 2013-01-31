@@ -29,7 +29,8 @@ function Drawable() {
 
 function CreateObjects() {
 
-	this.enemyballHelper = Enemyball();
+
+
 
 }
 
@@ -37,7 +38,7 @@ function createEnemyBalls() {
 
 	this.enemyball = new Enemyball();
 
-	return enemyball;
+	return this.enemyball;
 }
 
  

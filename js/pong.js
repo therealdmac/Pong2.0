@@ -177,8 +177,26 @@ function Game() {
 			// Initialize the mainball object
 			this.mainball = new Mainball();
 			this.mainball2 = new Mainball();
+			this.enemyball = new Enemyball();
+
+
 			//this.enemyball = createEnemyBalls();
 
+			/*
+
+			for(var i=0; i<2; i++) {
+
+				objectpool[i] = createEnemyBalls();
+
+				console.log('objectPool[i] speeed is ' +objectpool[i].speed);
+
+				objectpool[i].init(100+i*50, 10, imageRepository.mainball.width, imageRepository.mainball.height);
+
+				objectpool[i].draw();
+
+				objectpool[i].
+
+			}  */
 			
 
 			// Set the mainball to start at middle
@@ -189,7 +207,7 @@ function Game() {
 
 			this.mainball2.init(0, 0, imageRepository.mainball.width, imageRepository.mainball.height);
 
-			//this.enemyball.init(100, 10, imageRepository.mainball.width, imageRepository.mainball.height);
+			this.enemyball.init(100, 10, imageRepository.mainball.width, imageRepository.mainball.height);
 
 			// Initialize the Shooter
 			this.shooter = new Shooter();
@@ -215,7 +233,7 @@ function Game() {
 		this.paddle.draw();
 		this.mainball.draw();
 		this.mainball2.draw();
-		//this.enemyball.draw();
+		this.enemyball.draw();
 		this.shooter.draw();
 
 		//console.log('this.enemyball.leftEdge is ' +this.enemyball.leftEdge);
@@ -239,17 +257,13 @@ function animate() {
 	// Rendering 
 	game.mainball.draw();
 	game.mainball2.draw();
-	//game.enemyball.draw();
 	game.paddle.move();
+	game.enemyball.draw();
 	game.shooter.move();
-}
 
-function collisionEngine() {
-	requestAnimFrame( animate );
-	// separate thread - use web workers
 	collisionDetection();
-
 }
+
 
 
 /**	
