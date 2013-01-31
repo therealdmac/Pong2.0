@@ -1,9 +1,7 @@
-
-/**
- * Initialize the Game and start it.
+ /**
+ * Initialize the Game and start it
  */
 var game = new Game();
-
 
 function init() {
 	if(game.init())
@@ -16,34 +14,31 @@ function restartGame() {
 	//	document.location.reload();
 }
 
-function startWorker()
-{
-if(typeof(Worker)!=="undefined")
-  {
-    if(typeof(w)=="undefined")
-  {
-  	console.log('web workers created!');
-    w=new Worker("js/webworkers.js");
-  }
+function startWorker() {
+	if(typeof(Worker)!=="undefined")
+	  {
+	    if(typeof(w)=="undefined")
+	  {
+	  	console.log('web workers created!');
+	    w=new Worker("js/webworkers.js");
+	  }
 
-  // when web workers return a message
-  w.onmessage = function (event) {
-    document.getElementById("result").innerHTML=event.data;
-    };
-  }
-else
-  {
-  document.getElementById("result").innerHTML="Sorry, your browser does not support Web Workers...";
-  }
+	  // when web workers return a message
+	  w.onmessage = function (event) {
+	    document.getElementById("result").innerHTML=event.data;
+	    };
+	  }
+	else
+	  {
+	  document.getElementById("result").innerHTML="Sorry, your browser does not support Web Workers...";
+	  }
 }
 
-function stopWorker()
-{ 
+function stopWorker() { 
   w.terminate();
 }
 
 function testWorker() {
-{
 	i=i+1;
 	postMessage(i);
 	setTimeout("timedCount()",500);
