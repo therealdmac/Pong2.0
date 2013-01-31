@@ -15,6 +15,32 @@ function restartGame() {
 	//	document.location.reload();
 }
 
+function startWorker()
+{
+if(typeof(Worker)!=="undefined")
+  {
+    if(typeof(w)=="undefined")
+  {
+  	console.log('web workers created!');
+    //w = new Worker("webworkers.js");
+    	console.log('web workers created 2!');
+  }
+  // when web workers return a message
+  w.onmessage = function (event) {
+    document.getElementById("result").innerHTML=event.data;
+    };
+  }
+else
+  {
+  document.getElementById("result").innerHTML="Sorry, your browser does not support Web Workers...";
+  }
+}
+
+function stopWorker()
+{ 
+  w.terminate();
+}
+
 /**
  * Define an object to hold all our images for the game so images
  * are only ever created once. This type of object is known as a 
@@ -100,6 +126,8 @@ function Game() {
 			Ball.prototype.canvasWidth = this.mainCanvas.width;
 			Ball.prototype.canvasHeight = this.mainCanvas.height;
 
+			console.log(Ball.prototype.canvasWidth);
+
 			// Initialize the background object
 			this.background = new Background();
 			this.background.init(0,0); // Set draw point to 0,0
@@ -126,7 +154,7 @@ function Game() {
 
 			this.mainball2.init(0, 0, imageRepository.mainball.width, imageRepository.mainball.height);
 
-			this.enemyball.init(50, 10, imageRepository.mainball.width, imageRepository.mainball.height);
+			this.enemyball.init(100, 10, imageRepository.mainball.width, imageRepository.mainball.height);
 			
 
 			return true;
@@ -145,6 +173,8 @@ function Game() {
 		this.mainball.draw();
 		this.mainball2.draw();
 		this.enemyball.draw();
+
+		//console.log('this.enemyball.leftEdge is ' +this.enemyball.leftEdge);
 
 		// start the animation loop
 		animate();

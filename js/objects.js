@@ -56,7 +56,7 @@ function Drawable() {
  
  function ObjectPool() {
 	
-	this.radius = r
+	this.radius = r;
  }
 
 /**
@@ -149,6 +149,8 @@ Paddle.prototype = new Rectangle();
  	this.speed = 2;
     this.speedX = this.speed;
     this.speedY = this.speed;
+
+
 
  }
  Ball.prototype = new Drawable();
