@@ -4,6 +4,7 @@
  */
 var game = new Game();
 
+
 function init() {
 	if(game.init())
 		game.start();
@@ -22,9 +23,9 @@ if(typeof(Worker)!=="undefined")
     if(typeof(w)=="undefined")
   {
   	console.log('web workers created!');
-    //w = new Worker("webworkers.js");
-    	console.log('web workers created 2!');
+    w=new Worker("js/webworkers.js");
   }
+
   // when web workers return a message
   w.onmessage = function (event) {
     document.getElementById("result").innerHTML=event.data;
@@ -39,6 +40,13 @@ else
 function stopWorker()
 { 
   w.terminate();
+}
+
+function testWorker() {
+{
+	i=i+1;
+	postMessage(i);
+	setTimeout("timedCount()",500);
 }
 
 /**
