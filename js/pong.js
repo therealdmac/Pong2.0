@@ -1,7 +1,11 @@
  /**
  * Initialize the Game and start it
  */
+objectpool = new Array();
 var game = new Game();
+
+var objects = new CreateObjects();
+
 var d = new Date();
 var time1 = 0;
 var time2 = 0;
@@ -155,10 +159,11 @@ function Game() {
 			Shooter.prototype.canvasHeight = this.paddleCanvas.height;
 	
 
-
-			// Initialize the background object
+			/// Initialize the background object
 			this.background = new Background();
 			this.background.init(0,0); // Set draw point to 0,0
+
+			
 
 			// Initialize the paddle object
 			this.paddle = new Paddle();
@@ -172,7 +177,9 @@ function Game() {
 			// Initialize the mainball object
 			this.mainball = new Mainball();
 			this.mainball2 = new Mainball();
-			this.enemyball = new Enemyball();
+			//this.enemyball = createEnemyBalls();
+
+			
 
 			// Set the mainball to start at middle
 			var mainballStartX = this.mainCanvas.width/2 - imageRepository.mainball.width;
@@ -182,7 +189,7 @@ function Game() {
 
 			this.mainball2.init(0, 0, imageRepository.mainball.width, imageRepository.mainball.height);
 
-			this.enemyball.init(100, 10, imageRepository.mainball.width, imageRepository.mainball.height);
+			//this.enemyball.init(100, 10, imageRepository.mainball.width, imageRepository.mainball.height);
 
 			// Initialize the Shooter
 			this.shooter = new Shooter();
@@ -191,7 +198,6 @@ function Game() {
 			this.shooter.init(shooterStartX, shooterStartY, imageRepository.shooter.width,
 			               imageRepository.paddle.height);
 			
-
 			return true;
 		} else {
 			return false;
@@ -203,11 +209,13 @@ function Game() {
 		//alert('Start Game?');
 
 		// draw everything first round
-		game.background.draw();
+		
+
+		this.background.draw();
 		this.paddle.draw();
 		this.mainball.draw();
 		this.mainball2.draw();
-		this.enemyball.draw();
+		//this.enemyball.draw();
 		this.shooter.draw();
 
 		//console.log('this.enemyball.leftEdge is ' +this.enemyball.leftEdge);
@@ -231,17 +239,17 @@ function animate() {
 	// Rendering 
 	game.mainball.draw();
 	game.mainball2.draw();
-	game.enemyball.draw();
+	//game.enemyball.draw();
 	game.paddle.move();
 	game.shooter.move();
-
-
-
-	// separate thread - use web workers
-	collisionDetection();
 }
 
+function collisionEngine() {
+	requestAnimFrame( animate );
+	// separate thread - use web workers
+	collisionDetection();
 
+}
 
 
 /**	

@@ -27,6 +27,19 @@ function Drawable() {
 	};
 }
 
+function CreateObjects() {
+
+	this.enemyballHelper = Enemyball();
+
+}
+
+function createEnemyBalls() {
+
+	this.enemyball = new Enemyball();
+
+	return enemyball;
+}
+
  
 
 // Rectangle class
@@ -134,7 +147,7 @@ function Shooter() {
 
 		this.context.drawImage(imageRepository.shooter, this.x, this.y);
 
-		console.log('canvasWidth is ' +this.canvasWidth-this.width)
+		//console.log('canvasWidth is ' +this.canvasWidth-this.width)
 	};
 
 	this.move = function() {
