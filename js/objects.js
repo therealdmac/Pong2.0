@@ -27,11 +27,18 @@ function Drawable() {
 	};
 }
 
-function CreateObjects() {
-
-
-
-
+function CreateObjects(i) {
+	switch(i){
+	default:
+		return new Enemyball();
+		break;
+	case 0:
+		return new Mainball();
+		break;
+	case 1:
+		return new Paddle();
+		break;
+	}
 }
 
 function createEnemyBalls() {
@@ -68,9 +75,30 @@ function createEnemyBalls() {
  * Object Pool class
  */
  
- function ObjectPool() {
+ function ObjectPool(m) {
 	
-	this.radius = r;
+	this.maxSize = m;
+	this.allObj = [];
+	
+	this.CreateObj = function(i){
+		
+		var newObj = CreateObjects(i);
+		this.allObj.push(newObj);
+		return newObj;
+	}
+	this.DeleteObj = function(i){
+		this.allObj.splice(i,1);
+	}
+	this.draw = function(i){
+		for(var i=0; i<this.allObj.length; i++)
+			this.allObj[i].draw();
+	}
+	this.animate = function(i){
+		for(var i=0; i<this.allObj.length; i++){
+			this.allObj[i].move();
+			this.draw();
+		}
+	}
  }
 
 /**
@@ -189,7 +217,7 @@ Shooter.prototype = new Rectangle();
  	this.direction = 0;
  	this.mass = 10;
 
- 	this.speed = 2;
+ 	this.speed = 1;
     this.speedX = this.speed;
     this.speedY = this.speed;
 

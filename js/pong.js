@@ -159,14 +159,15 @@ function Game() {
 			Shooter.prototype.canvasHeight = this.paddleCanvas.height;
 	
 
-			/// Initialize the background object
+			// Initialize the background object
 			this.background = new Background();
 			this.background.init(0,0); // Set draw point to 0,0
 
 			
-
+			this.Pool = new ObjectPool(10);
 			// Initialize the paddle object
-			this.paddle = new Paddle();
+			//this.paddle = new Paddle();
+			this.paddle = this.Pool.CreateObj(1);
 
 			// Set the paddle to start near the bottom middle of the canvas
 			var paddleStartX = this.paddleCanvas.width/2 - imageRepository.paddle.width;
@@ -175,9 +176,12 @@ function Game() {
 			               imageRepository.paddle.height);
 
 			// Initialize the mainball object
-			this.mainball = new Mainball();
-			this.mainball2 = new Mainball();
-			this.enemyball = new Enemyball();
+			//this.mainball = new Mainball();
+			//this.mainball2 = new Mainball();
+			//this.enemyball = new Enemyball();
+			this.mainball = this.Pool.CreateObj(0);
+			this.mainball2 = this.Pool.CreateObj(0);
+			this.enemyball = this.Pool.CreateObj(3);
 
 
 			//this.enemyball = createEnemyBalls();
@@ -230,11 +234,13 @@ function Game() {
 		
 
 		this.background.draw();
-		this.paddle.draw();
-		this.mainball.draw();
-		this.mainball2.draw();
-		this.enemyball.draw();
+		//this.paddle.draw();
+		//this.mainball.draw();
+		//this.mainball2.draw();
+		//this.enemyball.draw();
 		this.shooter.draw();
+		this.Pool.draw();
+		alert("asdf");
 
 		//console.log('this.enemyball.leftEdge is ' +this.enemyball.leftEdge);
 
@@ -255,10 +261,11 @@ function animate() {
 	requestAnimFrame( animate );
 	
 	// Rendering 
-	game.mainball.draw();
-	game.mainball2.draw();
-	game.paddle.move();
-	game.enemyball.draw();
+	//game.mainball.draw();
+	//game.mainball2.draw();
+	//game.paddle.move();
+	//game.enemyball.draw();
+	game.Pool.animate();
 	game.shooter.move();
 
 	collisionDetection();
