@@ -200,8 +200,7 @@ function Game() {
 			this.paddleContext = this.paddleCanvas.getContext('2d');
 			this.mainContext = this.mainCanvas.getContext('2d');
 
-			// Initialize objects to contain their context and canvas
-			// information
+			// Initialize objects to contain their context and canvas information
 			Background.prototype.context = this.bgContext;
 			Background.prototype.canvasWidth = this.bgCanvas.width;
 			Background.prototype.canvasHeight = this.bgCanvas.height;
@@ -218,16 +217,24 @@ function Game() {
 			Shooter.prototype.canvasWidth = this.paddleCanvas.width;
 			Shooter.prototype.canvasHeight = this.paddleCanvas.height;
 	
+			// Initialize the Object Pool		
+			this.Pool = new ObjectPool(10);	
 
-			// Initialize the background object
-			this.background = new Background();
-			this.background.init(0,0); // Set draw point to 0,0
-
-			
-			this.Pool = new ObjectPool(10);
-			// Initialize the paddle object
-			//this.paddle = new Paddle();
+			// Initialize the objects
+			this.mainball = this.Pool.CreateObj(0);
+			this.mainball2 = this.Pool.CreateObj(0);
+			this.enemyball = this.Pool.CreateObj(5);
 			this.paddle = this.Pool.CreateObj(1);
+			this.shooter = this.Pool.CreateObj(2)
+			this.background = this.Pool.CreateObj(3)
+			
+
+			// *************************
+			// Initialize the objects' starting location
+			// *************************
+
+			// Background Draw
+			this.background.init(0,0); 
 
 			// Set the paddle to start near the bottom middle of the canvas
 			var paddleStartX = this.paddleCanvas.width/2 - imageRepository.paddle.width;
@@ -235,21 +242,16 @@ function Game() {
 			this.paddle.init(paddleStartX, paddleStartY, imageRepository.paddle.width,
 			               imageRepository.paddle.height);
 
-			// Initialize the objects
-			this.mainball = this.Pool.CreateObj(0);
-			this.mainball2 = this.Pool.CreateObj(0);
-			this.enemyball = this.Pool.CreateObj(3);
-			this.shooter = this.Pool.CreateObj(2)
-			
-
-			// Initialize the objects' starting location
+			// Mainball starting location
 			var mainballStartX = this.mainCanvas.width/2 - imageRepository.mainball.width;
 			var mainballStartY = this.mainCanvas.height/10;
 
 			this.mainball.init(mainballStartX, mainballStartY, imageRepository.mainball.width, imageRepository.mainball.height);
 
+			// Second Mainball starting location
 			this.mainball2.init(0, 0, imageRepository.mainball.width, imageRepository.mainball.height);
 
+			// EnemyBall starting location
 			this.enemyball.init(100, 10, imageRepository.mainball.width, imageRepository.mainball.height);
 
 			// Initialize the Shooter
@@ -272,24 +274,17 @@ function Game() {
 		//alert('Start Game?');
 
 		// draw everything first round
-		
-
 		this.background.draw();
-		//this.paddle.draw();
-		//this.mainball.draw();
-		//this.mainball2.draw();
-		//this.enemyball.draw();
-		this.shooter.draw();
+
 		this.Pool.draw();
 
 		// Test Frame Per Second
 		checkFPS();
 
-
 		// start the animation loop
 		animate();
-
 			
+		// start the debugging tool
 		debugTool();
 	
 
@@ -308,15 +303,7 @@ function animate() {
 	requestAnimFrame( animate );
 	
 	// Rendering 
-	//game.mainball.draw();
-	//game.mainball2.draw();
-	//game.paddle.move();
-	//game.enemyball.draw();
-
 	game.Pool.animate();
-	game.shooter.move();
-
-
 
 	collisionDetection();
 

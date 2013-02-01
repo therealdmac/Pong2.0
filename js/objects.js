@@ -91,13 +91,15 @@ function Drawable() {
 		case 2:
 			return new Shooter();
 			break;
+		case 3:
+			return new Background();
+			break;
 		}
 	}
 
 /**
  * Creates the Background object which will become a child of
- * the Drawable object. The background is drawn on the "background"
- * canvas and creates the illusion of moving by panning the image.
+ * the Drawable object. The background is drawn on the "background" canvas 
  */
 function Background() {
 
@@ -168,8 +170,6 @@ function Shooter() {
 	this.draw = function() {
 
 		this.context.drawImage(imageRepository.shooter, this.x, this.y);
-
-		//console.log('canvasWidth is ' +this.canvasWidth-this.width)
 	};
 
 	this.move = function() {
@@ -184,12 +184,9 @@ function Shooter() {
 		if (this.x < 10) {
 			this.speed = -this.speed;
 		} else if (this.x >= this.canvasWidth - this.width) {
-			this.speed = this.speed;
+			console.log('shooter gone right bound');
+			this.speed = -this.speed;
 		}
-		
-
-			
-
 
 		// Finish by redrawing the paddle
 		this.draw();
@@ -214,8 +211,6 @@ Shooter.prototype = new Rectangle();
     this.speedX = this.speed;
     this.speedY = this.speed;
 
-
-
  }
  Ball.prototype = new Drawable();
 
@@ -239,7 +234,6 @@ function Mainball() {
 
 	    this.x += this.speedX;
 	    this.y += this.speedY;
-
 	    
 	    // X Collision with the wall
 	    if (this.x <= this.leftEdge) {       
@@ -248,7 +242,6 @@ function Mainball() {
 	    else if (this.x >= this.rightEdge - this.width) {
 	      this.speedX = -this.speed;
 	    }
-
 
 	    // Y Collision
 	    if (this.y >= this.bottomEdge - this.height - 16) {
