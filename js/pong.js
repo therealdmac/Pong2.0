@@ -1,18 +1,11 @@
  /**
  * Initialize the Game and start it
  */
-
 var game = new Game();
-
 
 var d = new Date();
 var time1 = 0;
 var time2 = 0;
-
-// debug flag
-var debugFlag = 0;
-
-
 
 // ************************************ 
 // calculate frames per second
@@ -42,6 +35,9 @@ setInterval(function(){
 // ************************************ 
 // debug Tool
 // ************************************ 
+// debug flag
+var debugFlag = 0;
+
 function debugTool() {
 
 
@@ -51,6 +47,11 @@ function debugTool() {
 	document.getElementById("mbSx").innerHTML=(game.mainball.speedX).toFixed(1);
 	document.getElementById("mbSy").innerHTML=(game.mainball.speedY).toFixed(1); 
 
+
+	// shooter debug
+	document.getElementById("shooter-Sx").innerHTML=(game.shooter.speed).toFixed(1);
+
+	// How fast to update debugTool
 	setTimeout( debugTool, 100);
 }
 
@@ -205,17 +206,17 @@ function Game() {
 			Background.prototype.canvasWidth = this.bgCanvas.width;
 			Background.prototype.canvasHeight = this.bgCanvas.height;
 
-			Paddle.prototype.context = this.paddleContext;
-			Paddle.prototype.canvasWidth = this.paddleCanvas.width;
-			Paddle.prototype.canvasHeight = this.paddleCanvas.height;
-
 			Ball.prototype.context = this.mainContext;
 			Ball.prototype.canvasWidth = this.mainCanvas.width;
 			Ball.prototype.canvasHeight = this.mainCanvas.height;
 
-			Shooter.prototype.context = this.paddleContext;
-			Shooter.prototype.canvasWidth = this.paddleCanvas.width;
-			Shooter.prototype.canvasHeight = this.paddleCanvas.height;
+			Paddle.prototype.context = this.paddleContext;
+			Paddle.prototype.canvasWidth = this.paddleCanvas.width;
+			Paddle.prototype.canvasHeight = this.paddleCanvas.height;
+
+			Shooter.prototype.context = this.mainContext;
+			Shooter.prototype.canvasWidth = this.mainCanvas.width;
+			Shooter.prototype.canvasHeight = this.mainCanvas.height;
 	
 			// Initialize the Object Pool		
 			this.pool = new ObjectPool(10);	
@@ -259,9 +260,6 @@ function Game() {
 			var shooterStartY = 0;
 			this.shooter.init(shooterStartX, shooterStartY, imageRepository.shooter.width,
 			               imageRepository.paddle.height);
-			
-
-			
 
 			return true;
 		} else {
@@ -271,23 +269,18 @@ function Game() {
 
 	// Start the animation loop
 	this.start = function() {
-		//alert('Start Game?');
 
 		// draw everything first round
-		this.background.draw();
-
 		this.pool.draw();
 
 		// Test Frame Per Second
 		checkFPS();
 
-		// start the animation loop
-		animate();
-			
 		// start the debugging tool
 		debugTool();
-	
 
+		// start the animation loop
+		animate();
 	};
 
 }
@@ -306,8 +299,6 @@ function animate() {
 	game.pool.animate();
 
 	collisionDetection();
-
-	
 }
 
 

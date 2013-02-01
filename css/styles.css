@@ -29,14 +29,13 @@ canvas {
 	top: 400px;
 	display: none;
 }
-	#mainball-debug, #timer-debug {
-		border: 1px solid black;
-		padding: 20px;
-	}
+
 
 	article {
 		float: left;
 		margin-right: 20px;
+		border: 1px solid black;
+		padding: 20px;
 	}
 
 	#timer-debug {

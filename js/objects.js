@@ -123,7 +123,6 @@ Background.prototype = new Drawable();
 function Paddle() {
 
 	this.speed = 4;
-	var counter = 0;
 
 	this.draw = function() {
 		this.context.drawImage(imageRepository.paddle, this.x, this.y);
@@ -131,21 +130,17 @@ function Paddle() {
 
 	this.move = function() {	
 
-		counter++;
 
 		// Determine if the action is move action
 		if (KEY_STATUS.left || KEY_STATUS.right) {
-			// The ship moved, so erase it's current image so it can
-			// be redrawn in it's new location
+			// The ship moved, so erase it's current image so it can be redrawn in it's new location
 			this.context.clearRect(this.x, this.y, this.width, this.height);
 
-			// Update x and y according to the direction to move and
-			// redraw the ship. Change the else if's to if statements
-			// to have diagonal movement.
+			// detect keypress
 			if (KEY_STATUS.left) {
-
 				this.x -= this.speed;
-				if (this.x <= 0) // Keep player within the screen
+				// Keep player within the screen
+				if (this.x <= 0) 
 					this.x = 0;
 			} else if (KEY_STATUS.right) {
 				this.x += this.speed;
@@ -157,8 +152,6 @@ function Paddle() {
 			this.draw();
 		}
 	};
-
-
 }
 Paddle.prototype = new Rectangle();
 
@@ -167,34 +160,29 @@ function Shooter() {
 
 	//this.enemyballPool = 2;
 
-	this.speed = -2;
+	this.speed = -0.2;
 
 	this.draw = function() {
 
-		this.context.drawImage(imageRepository.shooter, this.x, this.y);
-	};
-
-	this.move = function() {
-
 		// clear current image
-		this.context.clearRect(this.x, this.y, this.width, this.height);
-		
-		// move left
+		this.context.clearRect(this.x-100, this.y, this.width+100, this.height);
+
+		// move according to speed's direction
 		this.x += this.speed;
 
 		if (this.x < 10) {
 			this.speed = -this.speed;
 		} else if (this.x >= this.canvasWidth - this.width) {
-			console.log('shooter gone right bound');
 			this.speed = -this.speed;
 		}
 
-		// Finish by redrawing the paddle
-		this.draw();
-	}
+		this.context.drawImage(imageRepository.shooter, this.x, this.y);
+	};
+
+
 
 	this.shoot = function() {
-		//game.Pool.
+
 	}
 
 }
@@ -235,7 +223,7 @@ function Mainball() {
     	//Move the main ball
 	this.draw = function() {
 		
-		this.context.clearRect(this.x-1, this.y, this.width+1, this.height);
+		this.context.clearRect(this.x+1, this.y, this.width-1, this.height);
 
 	    this.x += this.speedX;
 	    this.y += this.speedY;
