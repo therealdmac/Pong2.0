@@ -218,15 +218,15 @@ function Game() {
 			Shooter.prototype.canvasHeight = this.paddleCanvas.height;
 	
 			// Initialize the Object Pool		
-			this.Pool = new ObjectPool(10);	
+			this.pool = new ObjectPool(10);	
 
 			// Initialize the objects
-			this.mainball = this.Pool.CreateObj(0);
-			this.mainball2 = this.Pool.CreateObj(0);
-			this.enemyball = this.Pool.CreateObj(5);
-			this.paddle = this.Pool.CreateObj(1);
-			this.shooter = this.Pool.CreateObj(2)
-			this.background = this.Pool.CreateObj(3)
+			this.mainball = this.pool.CreateObj(0);
+			this.mainball2 = this.pool.CreateObj(0);
+			this.enemyball = this.pool.CreateObj(5);
+			this.paddle = this.pool.CreateObj(1);
+			this.shooter = this.pool.CreateObj(2)
+			this.background = this.pool.CreateObj(3)
 			
 
 			// *************************
@@ -276,7 +276,7 @@ function Game() {
 		// draw everything first round
 		this.background.draw();
 
-		this.Pool.draw();
+		this.pool.draw();
 
 		// Test Frame Per Second
 		checkFPS();
@@ -303,7 +303,7 @@ function animate() {
 	requestAnimFrame( animate );
 	
 	// Rendering 
-	game.Pool.animate();
+	game.pool.animate();
 
 	collisionDetection();
 

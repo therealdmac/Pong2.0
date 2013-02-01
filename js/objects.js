@@ -165,6 +165,8 @@ Paddle.prototype = new Rectangle();
 
 function Shooter() {
 
+	//this.enemyballPool = 2;
+
 	this.speed = -2;
 
 	this.draw = function() {
@@ -173,7 +175,6 @@ function Shooter() {
 	};
 
 	this.move = function() {
-
 
 		// clear current image
 		this.context.clearRect(this.x, this.y, this.width, this.height);
@@ -190,6 +191,10 @@ function Shooter() {
 
 		// Finish by redrawing the paddle
 		this.draw();
+	}
+
+	this.shoot = function() {
+		//game.Pool.
 	}
 
 }
