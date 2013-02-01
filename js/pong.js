@@ -13,17 +13,40 @@ var time2 = 0;
 // debug flag
 var debugFlag = 0;
 
+// calculate frames per second
+var fps = 0, now, lastUpdate = (new Date)*1 - 1;
+
+// The higher this value, the less the FPS will be affected by quick changes
+// Setting this to 1 will show you the FPS of the last sampled frame only
+var fpsFilter = 10;
+
+function drawFrame(){
+  // ... draw the frame ...
+
+  var thisFrameFPS = 1000 / ((now=new Date) - lastUpdate);
+  fps += (thisFrameFPS - fps) / fpsFilter;
+  lastUpdate = now;
+
+  setTimeout( drawFrame, 1 );
+}
+
+var fpsOut = document.getElementById('fps');
+setInterval(function(){
+  fpsOut.innerHTML = fps.toFixed(1) + "fps";
+}, 1000);
+
+
 // debug 
 function debugTool() {
 
-	console.log('debugging tool running');
 
 	// mainBall location
-	document.getElementById("mbX").innerHTML=game.mainball.x; 
-	document.getElementById("mbY").innerHTML=game.mainball.y; 
-	document.getElementById("mbSx").innerHTML=game.mainball.speedX;
-	document.getElementById("mbSy").innerHTML=game.mainball.speedY; 
-	setTimeout("startTimer()", 1);
+	document.getElementById("mbX").innerHTML=(game.mainball.x).toFixed(1); 
+	document.getElementById("mbY").innerHTML=(game.mainball.y).toFixed(1); 
+	document.getElementById("mbSx").innerHTML=(game.mainball.speedX).toFixed(1);
+	document.getElementById("mbSy").innerHTML=(game.mainball.speedY).toFixed(1); 
+
+	setTimeout("debugTool()", 500);
 }
 
 	function showDebug() {
@@ -39,6 +62,7 @@ function debugTool() {
 		debugFlag = 0;
 	}
 
+/*
 function startTimer() {
 	time1++;
 	//console.log('getMilliseconds returns ' +d.getMilliseconds());
@@ -51,13 +75,13 @@ function startTimer2() {
 	time2++;
 	setTimeout("startTimer2()", 1000);
 	document.getElementById("result2").innerHTML=time2;   
-}
+}*/
 
 
 function init() {
 	if(game.init())
 		game.start();
-}
+} 
 
 function restartGame() {
 	//if (game.mainball.y > game.mainball.bottomEdge)
@@ -249,6 +273,9 @@ function Game() {
 			this.shooter.init(shooterStartX, shooterStartY, imageRepository.shooter.width,
 			               imageRepository.paddle.height);
 			
+
+			
+
 			return true;
 		} else {
 			return false;
@@ -269,7 +296,6 @@ function Game() {
 		//this.enemyball.draw();
 		this.shooter.draw();
 		this.Pool.draw();
-		alert("asdf");
 
 		//console.log('this.enemyball.leftEdge is ' +this.enemyball.leftEdge);
 
@@ -298,11 +324,13 @@ function animate() {
 	game.Pool.animate();
 	game.shooter.move();
 
-	collisionDetection();
-
 	if(debugFlag) {
 		debugTool();
 	}
+
+	collisionDetection();
+
+	drawFrame();
 	
 }
 

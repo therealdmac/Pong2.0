@@ -5,7 +5,6 @@
  * functions. 
  */
 
-
 function Drawable() {
 
 	this.init = function(x, y, width, height) {
@@ -27,24 +26,6 @@ function Drawable() {
 	};
 }
 
-function CreateObjects(i) {
-	switch(i){
-	default:
-		return new Enemyball();
-		break;
-	case 0:
-		return new Mainball();
-		break;
-	case 1:
-		return new Paddle();
-		break;
-	}
-}
-
-
-
- 
-
 // Rectangle class
  function Rectangle() {
 
@@ -62,11 +43,11 @@ function CreateObjects(i) {
  
  function Wall() {
 	
-	// XXXX
  }
  Wall.prototype = new Drawable();
 
-  /**
+
+ /**
  * Object Pool class
  */
  
@@ -95,6 +76,20 @@ function CreateObjects(i) {
 		}
 	}
  }
+
+	function CreateObjects(i) {
+		switch(i){
+		default:
+			return new Enemyball();
+			break;
+		case 0:
+			return new Mainball();
+			break;
+		case 1:
+			return new Paddle();
+			break;
+		}
+	}
 
 /**
  * Creates the Background object which will become a child of
