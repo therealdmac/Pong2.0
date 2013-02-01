@@ -235,35 +235,14 @@ function Game() {
 			this.paddle.init(paddleStartX, paddleStartY, imageRepository.paddle.width,
 			               imageRepository.paddle.height);
 
-			// Initialize the mainball object
-			//this.mainball = new Mainball();
-			//this.mainball2 = new Mainball();
-			//this.enemyball = new Enemyball();
+			// Initialize the objects
 			this.mainball = this.Pool.CreateObj(0);
 			this.mainball2 = this.Pool.CreateObj(0);
 			this.enemyball = this.Pool.CreateObj(3);
-
-
-			//this.enemyball = createEnemyBalls();
-
-			/*
-
-			for(var i=0; i<2; i++) {
-
-				objectpool[i] = createEnemyBalls();
-
-				console.log('objectPool[i] speeed is ' +objectpool[i].speed);
-
-				objectpool[i].init(100+i*50, 10, imageRepository.mainball.width, imageRepository.mainball.height);
-
-				objectpool[i].draw();
-
-				objectpool[i].
-
-			}  */
+			this.shooter = this.Pool.CreateObj(2)
 			
 
-			// Set the mainball to start at middle
+			// Initialize the objects' starting location
 			var mainballStartX = this.mainCanvas.width/2 - imageRepository.mainball.width;
 			var mainballStartY = this.mainCanvas.height/10;
 
@@ -274,7 +253,6 @@ function Game() {
 			this.enemyball.init(100, 10, imageRepository.mainball.width, imageRepository.mainball.height);
 
 			// Initialize the Shooter
-			this.shooter = new Shooter();
 			var shooterStartX = this.paddleCanvas.width/2 - imageRepository.shooter.width;
 			var shooterStartY = 0;
 			this.shooter.init(shooterStartX, shooterStartY, imageRepository.shooter.width,

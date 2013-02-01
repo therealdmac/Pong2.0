@@ -88,6 +88,9 @@ function Drawable() {
 		case 1:
 			return new Paddle();
 			break;
+		case 2:
+			return new Shooter();
+			break;
 		}
 	}
 
