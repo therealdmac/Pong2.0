@@ -33,8 +33,6 @@ function collisionDetection() {
 		// run in parallel while animate is still running
 		physicsEngine(game.mainball, game.enemyball);
 
-
-
 	}
 
 	if( ( distance1 ) < 50) {
@@ -45,8 +43,6 @@ function collisionDetection() {
 		physicsEngine(game.mainball2, game.enemyball);
 	}
 
-	
-
 	return false;
 }
 
@@ -56,16 +52,6 @@ function shooterTimer() {
 
 }
 
-// debug 
 
-function debugTool() {
-
-	document.getElementById("mbX").innerHTML=game.mainball.x; 
-	document.getElementById("mbY").innerHTML=game.mainball.y; 
-	document.getElementById("mbSx").innerHTML=game.mainball.speedX;
-	document.getElementById("mbSy").innerHTML=game.mainball.speedY; 
-	setTimeout("startTimer()", 1);
-
-}
 
 

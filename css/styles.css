@@ -1,3 +1,6 @@
+h3 {
+	margin-top: 0;
+}
 canvas {
 	position: absolute;
 	top: 0px;
@@ -15,9 +18,16 @@ canvas {
 	z-index: 0;
 }
 
+#debug-console {
+	color: white;
+	background-color: rgb(92, 91, 99);
+	float: right;
+	padding: 20px;
+}
 #debug {
 	position: absolute;
 	top: 400px;
+	display: none;
 }
 	#mainball-debug, #timer-debug {
 		border: 1px solid black;
@@ -27,6 +37,10 @@ canvas {
 	article {
 		float: left;
 		margin-right: 20px;
+	}
+
+	#timer-debug {
+		display: none;
 	}
 
 	#wall-alarm {

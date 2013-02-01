@@ -41,12 +41,7 @@ function CreateObjects(i) {
 	}
 }
 
-function createEnemyBalls() {
 
-	this.enemyball = new Enemyball();
-
-	return this.enemyball;
-}
 
  
 

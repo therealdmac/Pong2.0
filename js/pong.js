@@ -1,7 +1,7 @@
  /**
  * Initialize the Game and start it
  */
-objectpool = new Array();
+//objectpool = new Array();
 var game = new Game();
 
 var objects = new CreateObjects();
@@ -10,7 +10,34 @@ var d = new Date();
 var time1 = 0;
 var time2 = 0;
 
+// debug flag
+var debugFlag = 0;
 
+// debug 
+function debugTool() {
+
+	console.log('debugging tool running');
+
+	// mainBall location
+	document.getElementById("mbX").innerHTML=game.mainball.x; 
+	document.getElementById("mbY").innerHTML=game.mainball.y; 
+	document.getElementById("mbSx").innerHTML=game.mainball.speedX;
+	document.getElementById("mbSy").innerHTML=game.mainball.speedY; 
+	setTimeout("startTimer()", 1);
+}
+
+	function showDebug() {
+
+		document.getElementById("debug").style.display = 'block';
+		document.getElementById("debug-status").innerHTML = 'ON';
+		debugFlag = 1;
+	}
+
+	function hideDebug() {
+		document.getElementById("debug").style.display = 'none';
+		document.getElementById("debug-status").innerHTML = 'OFF';
+		debugFlag = 0;
+	}
 
 function startTimer() {
 	time1++;
@@ -267,12 +294,16 @@ function animate() {
 	//game.mainball2.draw();
 	//game.paddle.move();
 	//game.enemyball.draw();
+
 	game.Pool.animate();
 	game.shooter.move();
 
 	collisionDetection();
 
-	debugTool();
+	if(debugFlag) {
+		debugTool();
+	}
+	
 }
 
 
