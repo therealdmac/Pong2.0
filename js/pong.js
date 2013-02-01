@@ -217,6 +217,9 @@ function Game() {
 			Shooter.prototype.context = this.mainContext;
 			Shooter.prototype.canvasWidth = this.mainCanvas.width;
 			Shooter.prototype.canvasHeight = this.mainCanvas.height;
+			
+			// Initialise collision handler
+			this.colHandler = new CollisionHandler(this.mainCanvas.width, this.mainCanvas.height);
 	
 			// Initialize the Object Pool		
 			this.pool = new ObjectPool(10);	
@@ -297,8 +300,7 @@ function animate() {
 	
 	// Rendering 
 	game.pool.animate();
-
-	collisionDetection();
+	game.colHandler.subDivide(game.Pool.allObj);
 }
 
 
