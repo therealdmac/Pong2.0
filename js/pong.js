@@ -1,10 +1,9 @@
  /**
  * Initialize the Game and start it
  */
-//objectpool = new Array();
+
 var game = new Game();
 
-var objects = new CreateObjects();
 
 var d = new Date();
 var time1 = 0;
@@ -13,21 +12,25 @@ var time2 = 0;
 // debug flag
 var debugFlag = 0;
 
+
+
+// ************************************ 
 // calculate frames per second
+// http://stackoverflow.com/questions/5078913/html5-canvas-performance-calculating-loops-frames-per-second
+// ************************************ 
 var fps = 0, now, lastUpdate = (new Date)*1 - 1;
 
 // The higher this value, the less the FPS will be affected by quick changes
 // Setting this to 1 will show you the FPS of the last sampled frame only
-var fpsFilter = 10;
+var fpsFilter = 50;
 
-function drawFrame(){
-  // ... draw the frame ...
+function checkFPS(){
 
   var thisFrameFPS = 1000 / ((now=new Date) - lastUpdate);
   fps += (thisFrameFPS - fps) / fpsFilter;
   lastUpdate = now;
 
-  setTimeout( drawFrame, 1 );
+  setTimeout( checkFPS, 1 );
 }
 
 var fpsOut = document.getElementById('fps');
@@ -36,7 +39,9 @@ setInterval(function(){
 }, 1000);
 
 
-// debug 
+// ************************************ 
+// debug Tool
+// ************************************ 
 function debugTool() {
 
 
@@ -46,7 +51,7 @@ function debugTool() {
 	document.getElementById("mbSx").innerHTML=(game.mainball.speedX).toFixed(1);
 	document.getElementById("mbSy").innerHTML=(game.mainball.speedY).toFixed(1); 
 
-	setTimeout("debugTool()", 500);
+	setTimeout( debugTool, 100);
 }
 
 	function showDebug() {
@@ -79,8 +84,10 @@ function startTimer2() {
 
 
 function init() {
-	if(game.init())
+	if(game.init()) {
 		game.start();
+	}
+		
 } 
 
 function restartGame() {
@@ -297,12 +304,19 @@ function Game() {
 		this.shooter.draw();
 		this.Pool.draw();
 
-		//console.log('this.enemyball.leftEdge is ' +this.enemyball.leftEdge);
+		// Test Frame Per Second
+		checkFPS();
+
 
 		// start the animation loop
 		animate();
 
+			
+		debugTool();
+	
+
 	};
+
 }
 
 
@@ -324,13 +338,10 @@ function animate() {
 	game.Pool.animate();
 	game.shooter.move();
 
-	if(debugFlag) {
-		debugTool();
-	}
+
 
 	collisionDetection();
 
-	drawFrame();
 	
 }
 
