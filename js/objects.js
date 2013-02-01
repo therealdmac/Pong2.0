@@ -248,7 +248,7 @@ function Mainball() {
 	    this.y += this.speedY;
 
 	    
-	    // X Collision
+	    // X Collision with the wall
 	    if (this.x <= this.leftEdge) {       
 	    	this.speedX = this.speed;
 	    }     

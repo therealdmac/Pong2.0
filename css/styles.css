@@ -1,0 +1,37 @@
+canvas {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	background: transparent;
+	}
+#background {
+	z-index: -2;
+	border: 1px solid black;
+}
+#main {
+	z-index: -1;
+}
+#paddle {
+	z-index: 0;
+}
+
+#debug {
+	position: absolute;
+	top: 400px;
+}
+	#mainball-debug, #timer-debug {
+		border: 1px solid black;
+		padding: 20px;
+	}
+
+	article {
+		float: left;
+		margin-right: 20px;
+	}
+
+	#wall-alarm {
+		width: 20px;
+		height: 20px;
+		background-color: red;
+		float: left;
+	}

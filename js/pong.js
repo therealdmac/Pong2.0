@@ -10,6 +10,8 @@ var d = new Date();
 var time1 = 0;
 var time2 = 0;
 
+
+
 function startTimer() {
 	time1++;
 	//console.log('getMilliseconds returns ' +d.getMilliseconds());
@@ -269,6 +271,8 @@ function animate() {
 	game.shooter.move();
 
 	collisionDetection();
+
+	debugTool();
 }
 
 
