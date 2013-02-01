@@ -68,7 +68,7 @@ function debugTool() {
 		debugFlag = 0;
 	}
 
-/*
+
 function startTimer() {
 	time1++;
 	//console.log('getMilliseconds returns ' +d.getMilliseconds());
@@ -81,7 +81,7 @@ function startTimer2() {
 	time2++;
 	setTimeout("startTimer2()", 1000);
 	document.getElementById("result2").innerHTML=time2;   
-}*/
+}
 
 
 function init() {
@@ -228,9 +228,10 @@ function Game() {
 			this.mainball = this.pool.CreateObj(0);
 			this.mainball2 = this.pool.CreateObj(0);
 			this.enemyball = this.pool.CreateObj(5);
+			this.shooter = this.pool.CreateObj(2);
 			this.paddle = this.pool.CreateObj(1);
-			this.shooter = this.pool.CreateObj(2)
-			this.background = this.pool.CreateObj(3)
+			
+			this.background = this.pool.CreateObj(3);
 			
 
 			// *************************
@@ -239,6 +240,12 @@ function Game() {
 
 			// Background Draw
 			this.background.init(0,0); 
+
+			// Initialize the Shooter
+			var shooterStartX = this.paddleCanvas.width/2 - imageRepository.shooter.width;
+			var shooterStartY = 0;
+			this.shooter.init(shooterStartX, shooterStartY, imageRepository.shooter.width,
+			               imageRepository.shooter.height);
 
 			// Set the paddle to start near the bottom middle of the canvas
 			var paddleStartX = this.paddleCanvas.width/2 - imageRepository.paddle.width;
@@ -258,11 +265,7 @@ function Game() {
 			// EnemyBall starting location
 			this.enemyball.init(100, 10, imageRepository.mainball.width, imageRepository.mainball.height);
 
-			// Initialize the Shooter
-			var shooterStartX = this.paddleCanvas.width/2 - imageRepository.shooter.width;
-			var shooterStartY = 0;
-			this.shooter.init(shooterStartX, shooterStartY, imageRepository.shooter.width,
-			               imageRepository.paddle.height);
+			
 
 			return true;
 		} else {

@@ -39,7 +39,7 @@ canvas {
 	}
 
 	#timer-debug {
-		display: none;
+		display: block;
 	}
 
 	#wall-alarm {

@@ -165,7 +165,7 @@ function Shooter() {
 	this.draw = function() {
 
 		// clear current image
-		this.context.clearRect(this.x-100, this.y, this.width+100, this.height);
+		this.context.clearRect(this.x, this.y, this.width, this.height);
 
 		// move according to speed's direction
 		this.x += this.speed;
@@ -223,7 +223,7 @@ function Mainball() {
     	//Move the main ball
 	this.draw = function() {
 		
-		this.context.clearRect(this.x+1, this.y, this.width-1, this.height);
+		this.context.clearRect(this.x+1, this.y, this.width, this.height);
 
 	    this.x += this.speedX;
 	    this.y += this.speedY;
