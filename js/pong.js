@@ -146,9 +146,9 @@ function setPaddleCurrentRegion(){
 function setGameBallRegion(){
 	//Get the region the game ball is in
 	if(game.mainball.x < (game.mainball.canvasWidth/2)){
-		game.mainball.ballRegion = "right";
+		game.mainball.ballRegion = "left";
 	}else{
-		game.mainball.ballRegion  = "left";
+		game.mainball.ballRegion  = "right";
 	}
 }
 function isTimeForManipulation(){
@@ -164,17 +164,18 @@ function isTimeForManipulation(){
 function manipulateGameBall(){
 	switch (game.paddle.paddleRegion){
 		case 'left': 	
-			console.log('paddle is at the left');	
-			if(game.mainball.ballRegion == "right"){
+			console.log('paddle is at the right');	
+			if(game.mainball.ballRegion == "right" && game.mainball.collidedwithrightEdge){
 				game.mainball.speedY += 8;
-				console.log('speed should increase');
+				console.log('manipulated! at left');
 			}
 			break;
 
 		case 'right': 	
-			console.log('paddle is at the right');
-			if(game.mainball.ballRegion == "left"){
+			console.log('paddle is at the left');
+			if(game.mainball.ballRegion == "left" && game.mainball.collidedwithleftEdge){
 				game.mainball.speedY += 8;
+				console.log('manipulated! at right');
 			}
 			break;
 
@@ -195,7 +196,7 @@ function gameTimer(){
 
 	setTimeout("gameTimer()", 1000);
 
-	console.log('game time is ' +gameTime);
+	//console.log('game time is ' +gameTime);
 }
 
 

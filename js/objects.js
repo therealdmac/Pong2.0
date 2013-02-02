@@ -211,7 +211,7 @@ Shooter.prototype = new Rectangle();
  	this.direction = 0;
  	this.mass = 10;
 
- 	this.speed = 1;
+ 	this.speed = 2;
     this.speedX = this.speed;
     this.speedY = this.speed;
 
@@ -236,9 +236,15 @@ function Mainball() {
     this.ballMovingDown = false;
     this.ballMovingRight = false;
 	/******************** added by beeb **************/
+
+	this.collidedwithleftEdge = null;
+	this.collidedwithrightEdge = null;
 	
     	//Move the main ball
 	this.draw = function() {
+
+		this.collidedwithleftEdge = false;
+		this.collidedwithrightEdge = false;
 		
 		this.context.clearRect(this.x+1, this.y, this.width, this.height);
 
@@ -248,9 +254,11 @@ function Mainball() {
 	    // X Collision with the wall
 	    if (this.x <= this.leftEdge) {       
 	    	this.speedX = this.speed;
+	    	this.collidedwithleftEdge = true;
 	    }     
 	    else if (this.x >= this.rightEdge - this.width) {
-	      this.speedX = -this.speed;
+	      	this.speedX = -this.speed;
+	    	this.collidedwithrightEdge = true;
 	    }
 
 	    // Y Collision
@@ -260,12 +268,17 @@ function Mainball() {
 	    	if (this.x + 25 > game.paddle.x && this.x < game.paddle.x + 64)
 	    		this.speedY = -this.speed; // reverse speed
 	    	else
-	    		restartGame();
+	    		this.speedY = -this.speed;
+	    		// temporary hold
+	    		//restartGame();
 	    } else if (this.y <= this.topEdge) { // if hit the top
 	    	this.speedY = this.speed;
 	    }
 
 		this.context.drawImage(imageRepository.mainball, this.x, this.y);
+
+		console.log('collide with right: ' +this.collidedwithrightEdge);
+		console.log('collide with left: ' +this.collidedwithleftEdge);
 	};
 	
 
