@@ -36,7 +36,7 @@ setInterval(function(){
 // debug Tool
 // ************************************ 
 // debug flag
-var debugFlag = 0;
+var debugFlag = 1;
 
 function debugTool() {
 
@@ -227,11 +227,11 @@ function Game() {
 			// Initialize the objects
 			this.mainball = this.pool.CreateObj(0);
 			this.mainball2 = this.pool.CreateObj(0);
-			this.enemyball = this.pool.CreateObj(5);
-			this.shooter = this.pool.CreateObj(2);
-			this.paddle = this.pool.CreateObj(1);
+			this.enemyball = this.pool.CreateObj(1);
+			this.shooter = new Shooter();
+			this.paddle = new Paddle();
 			
-			this.background = this.pool.CreateObj(3);
+			this.background = new Background();
 			
 
 			// *************************
@@ -277,6 +277,10 @@ function Game() {
 	this.start = function() {
 
 		// draw everything first round
+		game.background.draw();
+		game.paddle.draw();
+		game.shooter.draw();
+		game.pool.animate();
 		this.pool.draw();
 
 		// Test Frame Per Second
@@ -301,9 +305,19 @@ function Game() {
 function animate() {
 	requestAnimFrame( animate );
 	
-	// Rendering 
+	// Rendering
+	game.background.draw();
+	game.paddle.move();
+	game.paddle.draw();
+	game.shooter.draw();
 	game.pool.animate();
-	game.colHandler.subDivide(game.Pool.allObj);
+	//for(var i=0; i<game.pool.allObj.length;i++){
+	//alert(""+i+" "+game.pool.allObj[i].x+" "+game.pool.allObj[i].y);
+	//	for(var j=i+1; j<game.pool.allObj.length;j++){
+		//	collisionDetection(game.pool.allObj[i], game.pool.allObj[j]);
+		//}
+	//}
+	game.colHandler.subDivide(game.pool.allObj);
 }
 
 
