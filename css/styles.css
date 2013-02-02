@@ -10,6 +10,7 @@ canvas {
 #background {
 	z-index: -2;
 	border: 1px solid black;
+	background-color: black;
 }
 #main {
 	z-index: -1;

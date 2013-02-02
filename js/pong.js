@@ -7,6 +7,8 @@ var d = new Date();
 var time1 = 0;
 var time2 = 0;
 
+
+// Keep track of enemy ball
 // ***************************************** 
 // calculate frames per second
 // http://stackoverflow.com/questions/5078913/html5-canvas-performance-calculating-loops-frames-per-second
@@ -214,9 +216,9 @@ function Game() {
 			Paddle.prototype.canvasWidth = this.paddleCanvas.width;
 			Paddle.prototype.canvasHeight = this.paddleCanvas.height;
 
-			Shooter.prototype.context = this.mainContext;
-			Shooter.prototype.canvasWidth = this.mainCanvas.width;
-			Shooter.prototype.canvasHeight = this.mainCanvas.height;
+			Shooter.prototype.context = this.paddleContext;
+			Shooter.prototype.canvasWidth = this.paddleCanvas.width;
+			Shooter.prototype.canvasHeight = this.paddleCanvas.height;
 			
 			// Initialise collision handler
 			this.colHandler = new CollisionHandler(this.mainCanvas.width, this.mainCanvas.height);
@@ -277,7 +279,7 @@ function Game() {
 	this.start = function() {
 
 		// draw everything first round
-		game.background.draw();
+		//game.background.draw();
 		game.paddle.draw();
 		game.shooter.draw();
 		game.pool.animate();
@@ -306,7 +308,6 @@ function animate() {
 	requestAnimFrame( animate );
 	
 	// Rendering
-	game.background.draw();
 	game.paddle.move();
 	game.paddle.draw();
 	game.shooter.draw();
