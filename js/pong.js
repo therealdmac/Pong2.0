@@ -6,7 +6,7 @@ var game = new Game();
 var d = new Date();
 var time1 = 0;
 var time2 = 0;
-
+var gameTime = 0;
 
 // Keep track of enemy ball
 
@@ -104,6 +104,100 @@ function restartGame() {
 
 	//	document.location.reload();
 }
+
+/*************** added by beeb ********************/
+var ballMovingDown = false;
+var ballMovingRight = false;
+var paddleIsInTheRightRegionOfCanvas = false;
+var paddleIsInTheLeftRegionOfCanvas = false;
+var paddleRegion;//can use game.paddle.x
+var currentTime;
+var gameTimeElapsed;
+var isTimeForManipulation;
+
+function setGameBallYDirection(){
+	//If the ball is moving down, it is deemed to have positive direction
+	if(game.mainball.speedY > 0){
+		game.mainball.ballMovingDown  = true;
+	}else{
+		game.mainball.ballMovingDown = false;
+	}
+}
+function setGameBallXDirection(){
+	//If the ball is moving to the right, it is deemed to have positive direction
+	if(game.mainball.speedX > 0){
+		game.mainball.ballMovingRight = true;
+	}else{
+		game.mainball.ballMovingRight = false;
+	}
+}
+function setPaddleCurrentRegion(){
+	//console.log('The current paddle location is: ' + game.paddle.x);
+	if(game.paddle.x > (game.paddle.canvasWidth / 2)){
+		game.paddle.paddleIsInTheRightRegionOfCanvas = true;
+		game.paddle.paddleIsInTheLeftRegionOfCanvas = false;
+		game.paddle.paddleRegion = "right";
+	}else if((game.paddle.x + game.paddle.width ) < (game.paddle.canvasWidth / 2)){
+		game.paddle.paddleIsInTheLeftRegionOfCanvas = true;
+		game.paddle.paddleIsInTheRightRegionOfCanvas = false;
+		game.paddle.paddleRegion = "left";
+	}
+}
+function setGameBallRegion(){
+	//Get the region the game ball is in
+	if(game.mainball.x < (game.mainball.canvasWidth/2)){
+		game.mainball.ballRegion = "right";
+	}else{
+		game.mainball.ballRegion  = "left";
+	}
+}
+function isTimeForManipulation(){
+	//Set the gameBallParameters parameters
+	setGameBallYDirection();
+	setGameBallXDirection();
+	setGameBallRegion();
+	setPaddleCurrentRegion();
+	//Determine if the gameball be manipulated
+	if(game.mainball.ballMovingDown)	
+		manipulateGameBall();
+}
+function manipulateGameBall(){
+	switch (game.paddle.paddleRegion){
+		case 'left': 	
+			console.log('paddle is at the left');	
+			if(game.mainball.ballRegion == "right"){
+				game.mainball.speedY += 8;
+				console.log('speed should increase');
+			}
+			break;
+
+		case 'right': 	
+			console.log('paddle is at the right');
+			if(game.mainball.ballRegion == "left"){
+				game.mainball.speedY += 8;
+			}
+			break;
+
+		default:  	break;
+	}//switch case statement
+}
+function gameTimer(){
+	//currentTime = ;
+
+	//gameTimeElapsed = gameTime - currentTime;
+	//If the time elapsed is more than 10 seconds, it is time for manipulation
+	//if(gameTimeElapsed > 10)	
+	//	isTimeForManipulation();
+	if (gameTime > 3) {
+		isTimeForManipulation();
+	}
+	gameTime++;
+
+	setTimeout("gameTimer()", 1000);
+
+	console.log('game time is ' +gameTime);
+}
+
 
 function startWorker() {
 	console.log('entered startworkers');
@@ -234,7 +328,6 @@ function Game() {
 
 			// Initialize the objects
 			this.mainball = this.pool.CreateObj(0);
-			//this.mainball2 = this.pool.CreateObj(0);
 			this.enemyball = this.pool.CreateObj(1);
 			this.shooter = new Shooter();
 			this.paddle = new Paddle();
@@ -268,13 +361,8 @@ function Game() {
 			this.mainball.init(mainballStartX, mainballStartY, imageRepository.mainball.width, imageRepository.mainball.height);
 
 
-			/*
-			// Second Mainball starting location
-			this.mainball2.init(0, 0, imageRepository.mainball.width, imageRepository.mainball.height);
-			*/
-
 			// EnemyBall starting location
-			this.enemyball.init(100, 10, imageRepository.mainball.width, imageRepository.mainball.height);
+			this.enemyball.init(100, 10, imageRepository.enemyball.width, imageRepository.enemyball.height);
 
 			
 
@@ -302,6 +390,9 @@ function Game() {
 
 		// start the animation loop
 		animate();
+
+		// start game Timer
+		gameTimer();
 	};
 
 }

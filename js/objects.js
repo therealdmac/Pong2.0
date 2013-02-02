@@ -115,6 +115,12 @@ function Paddle() {
 
 	this.speed = 4;
 
+	/******************** added by beeb **************/
+	this.paddleIsInTheRightRegionOfCanvas = false;
+	this.paddleIsInTheLeftRegionOfCanvas = false;
+	this.paddleRegion = null;
+	/******************** added by beeb **************/
+
 	this.draw = function() {
 		this.context.drawImage(imageRepository.paddle, this.x, this.y);
 	};
@@ -181,7 +187,7 @@ function Shooter() {
 		if (enemyballPoolonScreen < this.enemyballPool) {
 
 			var thisEnemy = game.pool.CreateObj(1);
-			thisEnemy.init(enemyStartX, enemyStartY, imageRepository.mainball.width, imageRepository.mainball.height);
+			thisEnemy.init(enemyStartX, enemyStartY, imageRepository.enemyball.width, imageRepository.enemyball.height);
 
 			enemyballPoolonScreen++;
 
@@ -224,6 +230,12 @@ function Mainball() {
     this.rightEdge = this.canvasWidth;
     this.topEdge = 0;
     this.bottomEdge = this.canvasHeight;
+
+    /******************** added by beeb **************/
+    this.ballRegion = null;
+    this.ballMovingDown = false;
+    this.ballMovingRight = false;
+	/******************** added by beeb **************/
 	
     	//Move the main ball
 	this.draw = function() {
