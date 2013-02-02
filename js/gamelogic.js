@@ -1,3 +1,5 @@
+
+
 function CollisionHandler(w,h){
 	this.quadTree = new QuadTree({x:0,y:0,width:w, height:h});
 

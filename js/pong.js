@@ -9,6 +9,9 @@ var time2 = 0;
 
 
 // Keep track of enemy ball
+
+var enemyballPoolonScreen = 0;
+
 // ***************************************** 
 // calculate frames per second
 // http://stackoverflow.com/questions/5078913/html5-canvas-performance-calculating-loops-frames-per-second
@@ -70,6 +73,9 @@ function debugTool() {
 		debugFlag = 0;
 	}
 
+function shootBall() {
+	game.shooter.shoot();
+}
 
 function startTimer() {
 	time1++;
@@ -228,7 +234,7 @@ function Game() {
 
 			// Initialize the objects
 			this.mainball = this.pool.CreateObj(0);
-			this.mainball2 = this.pool.CreateObj(0);
+			//this.mainball2 = this.pool.CreateObj(0);
 			this.enemyball = this.pool.CreateObj(1);
 			this.shooter = new Shooter();
 			this.paddle = new Paddle();
@@ -261,8 +267,11 @@ function Game() {
 
 			this.mainball.init(mainballStartX, mainballStartY, imageRepository.mainball.width, imageRepository.mainball.height);
 
+
+			/*
 			// Second Mainball starting location
 			this.mainball2.init(0, 0, imageRepository.mainball.width, imageRepository.mainball.height);
+			*/
 
 			// EnemyBall starting location
 			this.enemyball.init(100, 10, imageRepository.mainball.width, imageRepository.mainball.height);

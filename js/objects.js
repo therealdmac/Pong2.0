@@ -149,7 +149,7 @@ Paddle.prototype = new Rectangle();
 
 function Shooter() {
 
-	//this.enemyballPool = 2;
+	this.enemyballPool = 10;
 
 	this.speed = -0.2;
 
@@ -173,6 +173,20 @@ function Shooter() {
 
 
 	this.shoot = function() {
+
+		var enemyStartX = game.shooter.x,
+			enemyStartY = game.shooter.y;
+
+
+		if (enemyballPoolonScreen < this.enemyballPool) {
+
+			var thisEnemy = game.pool.CreateObj(1);
+			thisEnemy.init(enemyStartX, enemyStartY, imageRepository.mainball.width, imageRepository.mainball.height);
+
+			enemyballPoolonScreen++;
+
+		}
+		console.log('no. of enemyball on screen = ' +enemyballPoolonScreen);
 
 	}
 
