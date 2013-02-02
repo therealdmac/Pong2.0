@@ -79,22 +79,13 @@ function Drawable() {
 
 	function CreateObjects(i) {
 		switch(i){
-		default:
+		case 1:
 			return new Enemyball();
 			break;
 		case 0:
 			return new Mainball();
 			break;
-		case 1:
-			return new Paddle();
-			break;
-		case 2:
-			return new Shooter();
-			break;
-		case 3:
-			return new Background();
-			break;
-		}
+		}		
 	}
 
 /**

@@ -15,6 +15,7 @@ function CollisionHandler(w,h){
 			//alert("" + x + " " +obj.length + obj[0].x);
 			for (y = 0, length = obj.length; y < length; y++) {
 				for (z = y+1, length = obj.length; z < length; z++) {
+					//alert("" + x + " " + y);
 					collisionDetection(obj[y], obj[z])
 				}
 			}		
@@ -227,7 +228,7 @@ function collisionDetection(obj1, obj2) {
 
 	var x2 = obj2.x;
 	var y2 = obj2.y;
-	alert(""+x1+" "+y1+" "+x2+" "+y2);
+	//alert(""+x1+" "+y1+" "+x2+" "+y2);
 
 //	var x3 = game.enemyball.x;	
 //	var y3 = game.enemyball.y;
@@ -257,7 +258,7 @@ function collisionDetection(obj1, obj2) {
 
 	if( ( distance1 ) < 50) {
 		physicsEngine(obj1, obj2);
-		//("asdf");
+		//alert(""+x1+" "+y1+" "+x2+" "+y2);
 	}
 
 //	if( ( distance3 ) < 50) {
